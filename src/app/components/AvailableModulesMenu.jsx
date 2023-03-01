@@ -53,6 +53,7 @@ const GRPCAT = {
   'tbrfl': 'experimental',
   'mahr': 'experimental',
   'rsl': 'experimental',
+  'exws': 'experimental',
   'tp': 'ordnance',
   'nl': 'ordnance',
   'sc': 'scanners',
@@ -110,7 +111,7 @@ const CATEGORIES = {
   'defence': ['ch', 'po', 'ec'],
   'scanners': ['sc', 'ss', 'cs', 'kw', 'ws'], // Overloaded with internal scanners
   // Experimental
-  'experimental': ['axmc', 'axmr', 'rfl', 'tbrfl', 'tbsc', 'tbem', 'xs', 'sfn', 'rcpl', 'dtl', 'rsl', 'mahr',],
+  'experimental': ['axmc', 'axmr', 'rfl', 'tbrfl', 'tbsc', 'tbem', 'xs', 'sfn', 'rcpl', 'dtl', 'rsl', 'mahr', 'exws'],
 
   // Guardian
   'guardian': ['gpp', 'gpd', 'gpc', 'ggc', 'gsrp', 'gfsb', 'ghrp', 'gmrp', 'gsc'],
@@ -286,7 +287,7 @@ export default class AvailableModulesMenu extends TranslatedComponent {
       // If the mounted module is experimental as well, we can replace it so
       // the maximum does not apply
       } else if (m.experimental && (!mountedModule || !mountedModule.experimental)) {
-        disabled = 4 <= ship.hardpoints.filter(o => o.m && o.m.experimental).length;
+        disabled = ship.calculateMaxExperimentalWeapons() <= ship.hardpoints.filter(o => o.m && o.m.experimental).length;
       } else if (m.grp === 'mlc' && (!mountedModule || mountedModule.grp !== 'mlc')) {
         disabled = 1 <= ship.internal.filter(o => o.m && o.m.grp === 'mlc').length;
       }

@@ -60,6 +60,7 @@ export const ModuleGroupToName = {
   sua: 'Supercruise Assist',
   mlc: "Multi Limpet Controller",
   rpl: "Repair Limpet Controller",
+  exws: "Experimental Weapons Stabiliser",
 
   // Hard Points
   bl: 'Beam Laser',

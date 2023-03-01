@@ -958,6 +958,10 @@ export default class Module {
     return this.get('shieldaddition', modified);
   }
 
+  getWeaponsSupported(modified = true) {
+    return this.get('weaponssupported', modified)
+  }
+
   /**
    * Get the jump range boost for this module
    * @param {Boolean} [modified=true] Whether to take modifications into account

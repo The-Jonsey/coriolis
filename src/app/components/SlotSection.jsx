@@ -199,7 +199,7 @@ export default class SlotSection extends TranslatedComponent {
             .filter(s => s.m && s.m.experimental).length;
           // Remove the module on the last slot if we now exceed the number of
           // experimentals allowed
-          if (m.experimental && 4 < experimentalNum) {
+          if (m.experimental && this.props.ship.calculateMaxExperimentalWeapons() < experimentalNum) {
             this.props.ship.updateStats(originSlot, null, originSlot.m);
             originSlot.m = null;  // Empty the slot
             originSlot.discountedCost = 0;

@@ -10,7 +10,7 @@ import { Ships, Modifications } from 'coriolis-data/dist';
 import { chain } from 'lodash';
 const zlib = require('zlib');
 
-const UNIQUE_MODULES = ['psg', 'sg', 'bsg', 'rf', 'fs', 'fh', 'gfsb', 'dc'];
+const UNIQUE_MODULES = ['psg', 'sg', 'bsg', 'rf', 'fs', 'fh', 'gfsb', 'dc', 'exws'];
 
 // Constants for modifications struct
 const SLOT_ID_DONE = -1;
@@ -1787,6 +1787,20 @@ export default class Ship {
       }
       // Ensure that all items are the correct length
       internals.splice(Ships[this.id].slots.internal.length);
+    }
+  }
+
+  /**
+   * Calculate max allowed experimental weapons
+   * @return {int} Max allowed experimental weapons
+   */
+  calculateMaxExperimentalWeapons() {
+    let experimentalWeaponStabilisers = this.internal.filter(o => o.m && o.m.grp === 'exws');
+    if (experimentalWeaponStabilisers.length === 0) {
+      return 4;
+    } else {
+      let stabiliser = experimentalWeaponStabilisers[0];
+      return 4 + stabiliser.m.getWeaponsSupported();
     }
   }
 }
